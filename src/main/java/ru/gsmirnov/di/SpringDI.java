@@ -25,9 +25,7 @@ public class SpringDI {
     public static void main(String[] args) {
         LOG.info("Application started");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(Store.class);
-        context.register(ConsoleInput.class);
-        context.register(StartUI.class);
+        context.scan("ru.gsmirnov.di");
         context.refresh();
         LOG.info("Context initialized.");
 

@@ -1,5 +1,7 @@
 package ru.gsmirnov.di;
 
+import org.springframework.stereotype.Component;
+
 /**
  * User interface, which provides the work of application.
  *
@@ -7,6 +9,7 @@ package ru.gsmirnov.di;
  * @version 0.1
  * @since 2020-05-12
  */
+@Component
 public class StartUI {
     /**
      * The storage to store requests.

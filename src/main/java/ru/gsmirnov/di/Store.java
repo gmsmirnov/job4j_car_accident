@@ -1,5 +1,7 @@
 package ru.gsmirnov.di;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import java.util.List;
  * @version 0.1
  * @since 2020-05-12
  */
+@Component
 public class Store {
     /**
      * The storage to store requests.

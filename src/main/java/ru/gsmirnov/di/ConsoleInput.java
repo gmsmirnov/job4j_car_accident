@@ -1,5 +1,7 @@
 package ru.gsmirnov.di;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +12,7 @@ import java.util.Scanner;
  * @version 1.2
  * @since 10/02/2018
  */
+@Component
 public class ConsoleInput implements Input {
     /**
      * Users answer reader.
