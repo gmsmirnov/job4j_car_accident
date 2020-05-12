@@ -1,5 +1,6 @@
 package ru.gsmirnov.di;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Scanner;
  * @since 10/02/2018
  */
 @Component
+@Scope(value = "prototype")
 public class ConsoleInput implements Input {
     /**
      * Users answer reader.

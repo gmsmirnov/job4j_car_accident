@@ -1,5 +1,6 @@
 package ru.gsmirnov.di;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
  * @since 2020-05-12
  */
 @Component
+@Scope(value = "prototype")
 public class Store {
     /**
      * The storage to store requests.

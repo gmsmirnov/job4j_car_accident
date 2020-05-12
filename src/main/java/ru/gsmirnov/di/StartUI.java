@@ -1,6 +1,7 @@
 package ru.gsmirnov.di;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
  * @since 2020-05-12
  */
 @Component
+@Scope(value = "prototype")
 public class StartUI {
     /**
      * The storage to store requests.
@@ -46,6 +48,7 @@ public class StartUI {
      * Shows all requests.
      */
     public void print() {
+        System.out.println("Storage content:");
         for (String value : this.store.getAll()) {
             System.out.println(value);
         }

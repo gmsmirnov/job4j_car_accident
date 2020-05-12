@@ -33,6 +33,10 @@ public class SpringDI {
         ui.add("Ivan Ivanov");
         ui.add("Petr Petrov");
         ui.print();
+
+        StartUI anotherUI = context.getBean(StartUI.class);
+        anotherUI.print();
+
         LOG.info("Application finished");
     }
 }
