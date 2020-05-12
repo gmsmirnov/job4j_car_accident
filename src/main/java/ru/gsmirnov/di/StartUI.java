@@ -14,12 +14,18 @@ public class StartUI {
     private Store store;
 
     /**
+     * The input.
+     */
+    private Input input;
+
+    /**
      * The constructor. Creates user interface with the specified storage.
      *
      * @param store the specified storage.
      */
-    public StartUI(Store store) {
+    public StartUI(Store store, ConsoleInput input) {
         this.store = store;
+        this.input = input;
     }
 
     /**
