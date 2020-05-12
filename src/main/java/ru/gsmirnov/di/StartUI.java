@@ -1,5 +1,6 @@
 package ru.gsmirnov.di;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,6 +15,7 @@ public class StartUI {
     /**
      * The storage to store requests.
      */
+    @Autowired
     private Store store;
 
     /**
@@ -22,12 +24,12 @@ public class StartUI {
     private Input input;
 
     /**
-     * The constructor. Creates user interface with the specified storage.
+     * Sets the specified input.
      *
-     * @param store the specified storage.
+     * @param input the specified input.
      */
-    public StartUI(Store store, ConsoleInput input) {
-        this.store = store;
+    @Autowired
+    public void setInput(Input input) {
         this.input = input;
     }
 
