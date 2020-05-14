@@ -25,3 +25,9 @@ notifications:
 env:
   global:
     CODECOV_TOKEN="08a4e2ef-8397-45fd-9a32-9c6df9737e1c"
+
+# Start PostgreSQL
+services:
+- postgresql
+before_install:
+- psql -c "CREATE DATABASE car_accident;" -U postgres
