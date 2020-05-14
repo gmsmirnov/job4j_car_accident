@@ -202,11 +202,20 @@
     <profiles>
         <profile>
             <id>dev</id>
+            <properties>
+                <profile.propertyFile>liquibase.properties</profile.propertyFile>
+                <profile.changeLogFile>liquibase/master.xml</profile.changeLogFile>
+                <profile.verbose>true</profile.verbose>
+                <profile.logging>info</profile.logging>
+            </properties>
+        </profile>
+        <profile>
+            <id>travis</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <profile.propertyFile>liquibase.properties</profile.propertyFile>
+                <profile.propertyFile>liquibase-travis.properties</profile.propertyFile>
                 <profile.changeLogFile>liquibase/master.xml</profile.changeLogFile>
                 <profile.verbose>true</profile.verbose>
                 <profile.logging>info</profile.logging>
