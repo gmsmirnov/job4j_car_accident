@@ -28,6 +28,7 @@
             </tr>
         </c:forEach>
     </table>
+    <a href="<c:url value="/add_accident.do"/>" class="btn btn-primary" role="button" aria-pressed="true">Добавить происшествие</a>
 </div>
 </body>
 </html>

@@ -40,11 +40,20 @@ public class AccidentService {
     }
 
     /**
-     * Gets all accidents. Simply pass them from data layer to controller.
+     * Gets all accidents. Simply pass them from the data layer to the controller.
      *
      * @return the list of all accidents.
      */
     public List<Accident> getAllAccidents() {
         return this.accidentRepository.getAllAccidents();
+    }
+
+    /**
+     * Adds a new accidents. Simply pass them from the controller to the data layer.
+     *
+     * @param accident a new accident.
+     */
+    public void add(Accident accident) {
+        this.accidentRepository.add(accident);
     }
 }

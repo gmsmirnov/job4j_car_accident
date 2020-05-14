@@ -13,6 +13,7 @@ import lombok.*;
 @Setter
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
 @AllArgsConstructor
 public class Accident {
     /**
@@ -35,4 +36,17 @@ public class Accident {
      * This accident's address.
      */
     private String address;
+
+    /**
+     * Creates a new Accident with the specified params
+     *
+     * @param name the specified accident's type.
+     * @param text the specified accident's description.
+     * @param address the specified accident's address.
+     */
+    public Accident(String name, String text, String address) {
+        this.name = name;
+        this.text = text;
+        this.address = address;
+    }
 }

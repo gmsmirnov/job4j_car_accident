@@ -11,24 +11,25 @@
 </head>
 <body>
 <div class="container">
-    <h2>Список происшествий:</h2>
-    <table class="table table-striped" id="table">
-        <tr>
-            <th>ID:</th>
-            <th>Тип происшествия:</th>
-            <th>Описание:</th>
-            <th>Адрес:</th>
-        </tr>
-        <c:forEach items="${index}" var="item">
-            <tr>
-                <td><c:out value="${item.id}"/></td>
-                <td><c:out value="${item.name}"/></td>
-                <td><c:out value="${item.text}"/></td>
-                <td><c:out value="${item.address}"/></td>
-            </tr>
-        </c:forEach>
-    </table>
-    <a href="<c:url value="/add_accident.do"/>" class="btn btn-primary" role="button" aria-pressed="true">Добавить происшествие</a>
+    <h2>Зарегистрируйте новое происшествие:</h2>
+    <form method="post" action="<c:url value="/add_accident.do"/>">
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label for="validationServer01">Тип происшествия</label>
+                <input type="text" class="form-control" id="validationServer03" placeholder="Тип происшествия" name="name" required>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="validationServer01">Описание</label>
+                <input type="text" class="form-control" id="validationServer01" placeholder="Описание происшествия" name="text" required>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="validationServer02">Адрес</label>
+                <input type="text" class="form-control" id="validationServer02" placeholder="Адрес" name="address" required>
+            </div>
+
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    </form>
 </div>
 </body>
 </html>

@@ -5,11 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <property name="autoIncrement" value="true"/>
-
     <changeSet id="001" author="gsmirnov">
         <createTable tableName="accident">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="acc_name" type="varchar(255)"/>
@@ -17,10 +15,19 @@
             <column name="address" type="varchar(255)"/>
         </createTable>
 
+        <!-- Postgres not support autoincrement, it uses sequences -->
+        <createSequence
+                sequenceName="seq_id"
+                startValue="10"/>
+        <sql dbms="postgresql" endDelimiter=";\n"  splitStatements="true"
+             stripComments="true">ALTER TABLE accident ALTER COLUMN id SET DEFAULT nextval('seq_id');
+        </sql>
+
         <loadData encoding="UTF-8"
                   file="liquibase/init/accident.csv"
                   separator=";"
                   tableName="accident">
         </loadData>
+
     </changeSet>
 </databaseChangeLog>

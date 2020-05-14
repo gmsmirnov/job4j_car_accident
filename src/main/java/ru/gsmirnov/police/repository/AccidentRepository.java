@@ -52,6 +52,16 @@ public class AccidentRepository {
     }
 
     /**
+     * Adds a new accident to the database.
+     *
+     * @param accident a new accident.
+     */
+    public void add(Accident accident) {
+        String sql = "INSERT INTO accident(acc_name, text, address) VALUES (?, ?, ?)";
+        this.jdbcTemplate.update(sql, accident.getName(), accident.getText(), accident.getAddress());
+    }
+
+    /**
      * The accident row mapper. It used to convert DB-accident-row into java-accident-object.
      *
      * @author Gregory Smirnov (gsmirnov <artress@ngs.ru>)
