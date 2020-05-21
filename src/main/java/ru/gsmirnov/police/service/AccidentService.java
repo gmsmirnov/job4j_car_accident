@@ -45,7 +45,7 @@ public class AccidentService {
      * @return the list of all accidents.
      */
     public List<Accident> getAllAccidents() {
-        return this.accidentRepository.getAllAccidents();
+        return this.accidentRepository.findAll();
     }
 
     /**
@@ -54,6 +54,6 @@ public class AccidentService {
      * @param accident a new accident.
      */
     public void add(Accident accident) {
-        this.accidentRepository.add(accident);
+        this.accidentRepository.save(accident);
     }
 }
