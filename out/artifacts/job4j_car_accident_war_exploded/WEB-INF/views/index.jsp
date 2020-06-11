@@ -29,6 +29,7 @@
         </c:forEach>
     </table>
     <a href="<c:url value="/add_accident.do"/>" class="btn btn-primary" role="button" aria-pressed="true">Добавить происшествие</a>
+    <a href="<c:url value="/logout.do"/>" class="btn btn-primary" role="button" aria-pressed="true">Выйти из системы</a>
 </div>
 </body>
 </html>

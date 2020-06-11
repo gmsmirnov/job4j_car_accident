@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = "ru.gsmirnov.police.controller")
+@ComponentScan(basePackages = "ru.gsmirnov.police")
 public class SpringWebConfig extends WebMvcConfigurationSupport {
     /**
      * Resolves the provided URI to actual URI.
