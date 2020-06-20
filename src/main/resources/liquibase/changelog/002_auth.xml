@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="002" author="gsmirnov">
+        <createTable tableName="users">
+            <column name="username" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="boolean" defaultValue="true"/>
+        </createTable>
+
+        <createTable tableName="authorities">
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseTableName="authorities"
+                                 baseColumnNames="username"
+                                 constraintName="fk__authority_username__users_username"
+                                 referencedTableName="users"
+                                 referencedColumnNames="username"/>
+
+        <sql>
+            create unique index ix_auth_username on authorities (username, authority);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

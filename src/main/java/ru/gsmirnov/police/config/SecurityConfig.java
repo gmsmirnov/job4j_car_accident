@@ -9,8 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
 
 /**
  * Authentication config.
@@ -24,12 +27,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(SecurityConfig.class);
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    /**
+     * Data source for connecting to database.
+     */
+    private DataSource dataSource;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    /**
+     * SecurityConfig constructor. Injects data source.
+     *
+     * @param dataSource specified in properties datasource.
+     */
+    @Autowired
+    public SecurityConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     /**
@@ -40,10 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().passwordEncoder(this.passwordEncoder)
-                    .withUser("user").password(this.passwordEncoder.encode("123456")).roles("USER")
-                .and()
-                    .withUser("admin").password(this.passwordEncoder.encode("123456")).roles("USER", "ADMIN");
+        auth.jdbcAuthentication().dataSource(this.dataSource)
+                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT username, authority From authorities WHERE username = ?")
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     /**
@@ -55,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login*")
+                .antMatchers("/login")
                     .permitAll()
                 .antMatchers("/**")
                     .hasAnyRole("USER", "ADMIN")

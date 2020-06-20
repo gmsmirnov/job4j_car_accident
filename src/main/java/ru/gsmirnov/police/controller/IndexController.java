@@ -3,6 +3,7 @@ package ru.gsmirnov.police.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +41,14 @@ public class IndexController {
 
     /**
      * Forms the list of all accidents for displaying on web page.
+     * Also displays entered user name.
      *
      * @param model the model map which contains attributes with linked objects.
      * @return index-view.
      */
     @RequestMapping(value = "/accidents", method = RequestMethod.GET)
     public String showAccidents(ModelMap model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("index", this.accidentService.getAllAccidents());
         return "index";
     }

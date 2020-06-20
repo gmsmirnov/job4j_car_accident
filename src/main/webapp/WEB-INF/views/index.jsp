@@ -11,6 +11,9 @@
 </head>
 <body>
 <div class="container">
+    <div>
+        <p class="font-weight-bold">Имя пользователя: <c:out value="${user.username}"/>.</p>
+    </div>
     <h2>Список происшествий:</h2>
     <table class="table table-striped" id="table">
         <tr>
