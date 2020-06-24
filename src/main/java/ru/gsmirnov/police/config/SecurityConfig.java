@@ -52,7 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(this.dataSource)
                 .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT username, authority From authorities WHERE username = ?")
+                .authoritiesByUsernameQuery(
+                        "SELECT u.username, a.authority "
+                        + "FROM users AS u "
+                        + "LEFT JOIN authorities AS a ON u.authority_id = a.id "
+                        + "WHERE u.username = ?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
@@ -65,14 +69,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login")
+                .antMatchers("/login.do", "/reg.do")
                     .permitAll()
                 .antMatchers("/**")
                     .hasAnyRole("USER", "ADMIN")
                 .and()
                     .formLogin()
                     .loginPage("/login.do")
-//                    .defaultSuccessUrl("/")
+                    .defaultSuccessUrl("/accidents.do")
                     .failureUrl("/login.do?error=true")
                     .permitAll()
                 .and()

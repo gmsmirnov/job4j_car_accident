@@ -6,30 +6,26 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <html>
 <head>
-    <title>Login</title>
+    <title>Registration</title>
 </head>
 <body>
 
 <div class="container">
-    <h2>Вход в систему управления происшествями:</h2>
-    <c:if test="${not empty errorMessage}">
-        <div class="alert alert-danger" role="alert">${errorMessage}</div>
-    </c:if>
-    <form name='login' method="post" action="<c:url value="/login.do"/>">
+    <h2>Регистрация пользователя:</h2>
+    <form name='reg' method="post" action="<c:url value="/reg.do"/>">
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="username">Логин:</label>
-                <input type="text" class="form-control" id="username" placeholder="Логин" name="username" required>
+                <input type="text" class="form-control" id="username" placeholder="Логин" name="name" required>
             </div>
             <div class="mb-3">
                 <label for="password">Пароль:</label>
                 <input type="password" class="form-control" id="password" placeholder="Пароль" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Войти</button>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
         </div>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
-    <a href="<c:url value="/reg.do"/>" class="badge badge-primary">Регистрация</a>
 </div>
 </body>
 </html>

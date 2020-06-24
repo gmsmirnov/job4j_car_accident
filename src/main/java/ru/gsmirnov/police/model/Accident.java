@@ -11,6 +11,7 @@ import javax.persistence.*;
  * @version 0.1
  * @since 2020-05-13
  */
+@Table(name = "accident")
 @Entity
 @Getter
 @Setter
@@ -23,7 +24,8 @@ public class Accident {
      * This accident's id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     private int id;
 

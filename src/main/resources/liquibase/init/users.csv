@@ -1,0 +1,3 @@
+id;username;password;enabled;authority_id
+1;root;$2a$10$p87cKR1vL6yjV1Fl.1/tzuG7.PHQ9/PYphNFdcLjCvVUy.toDQ7PC;1;1
+2;user;$2a$10$bCFMMu/rAAzhOj.EvVGVsO9hN3AFrG8WOTd7mSfBq2dFfR6kiM/JG;1;2

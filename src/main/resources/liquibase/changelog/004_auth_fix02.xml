@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="004" author="gsmirnov">
+        <createTable tableName="authorities">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="authority" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="users">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="boolean" defaultValue="true"/>
+            <column name="authority_id" type="int">
+                <constraints references="authorities(id)"
+                             foreignKeyName="fk__users_authority__authorities_id"
+                             nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Postgres not support autoincrement, it uses sequences -->
+        <createSequence
+                sequenceName="seq_user_id"
+                startValue="10"/>
+        <sql dbms="postgresql" endDelimiter=";\n"  splitStatements="true"
+             stripComments="true">ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('seq_user_id');
+        </sql>
+
+        <createSequence
+                sequenceName="seq_auth_id"
+                startValue="10"/>
+        <sql dbms="postgresql" endDelimiter=";\n"  splitStatements="true"
+             stripComments="true">ALTER TABLE authorities ALTER COLUMN id SET DEFAULT nextval('seq_auth_id');
+        </sql>
+
+        <loadData encoding="UTF-8"
+                  file="liquibase/init/authorities.csv"
+                  separator=";"
+                  tableName="authorities">
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="liquibase/init/users.csv"
+                  separator=";"
+                  tableName="users">
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

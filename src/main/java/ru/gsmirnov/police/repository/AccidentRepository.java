@@ -13,7 +13,6 @@ import java.util.List;
  * @version 0.1
  * @since 2020-05-14
  */
-@Repository
 public interface AccidentRepository extends CrudRepository<Accident, Integer> {
     /**
      * Gets the list of all accidents from database.
